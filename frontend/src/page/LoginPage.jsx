@@ -36,7 +36,7 @@ export function LoginPage() {
           <label htmlFor="username">아이디</label>
           <input id="username" value={username} onChange={e => setUsername(e.target.value)} placeholder="아이디" required="required"/>
           <label htmlFor="password">비밀번호</label>
-          <input id="password" type="password" value={passowrd} onChange={e => setPassword(e.target.value)} placeholder="비밀번호" required="required"/>
+          <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="비밀번호" required="required"/>
           <input type="submit" value="로그인"/>
         </form>
         {error && <div style={{color: 'red'}}>{error}</div>}
