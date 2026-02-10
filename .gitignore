@@ -389,4 +389,6 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,macos,intellij+all,visualstudiocode,java,react,gradle,node
 
+# frontend-gradle-plugin
 .frontend-gradle-plugin/
+node/

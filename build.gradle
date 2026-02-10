@@ -33,14 +33,28 @@ dependencies {
 configurations.compileOnly.extendsFrom(configurations.annotationProcessor)
 
 processResources {
-  dependsOn('assembleFrontend')
-  filesMatching("**/banner.txt") { expand(application: [title: project.name, version: project.version]) }
+  dependsOn('copyFrontendToResources')
+
+  def name = project.name
+  def version = project.version.toString()
+
+  filesMatching("**/banner.txt") { expand(application: [title: name, version: version]) }
 }
 
 frontend {
   packageJsonDirectory = file("${projectDir}/frontend")
   nodeVersion = '24.13.0'
   assembleScript = 'run build'
+}
+
+bootJar {
+  dependsOn('copyFrontendToResources')
+}
+
+tasks.register('copyFrontendToResources', Copy) {
+  dependsOn(assembleFrontend)
+  from(frontendBuildDir)
+  into("${buildDir}/resources/main/static")
 }
 
 springBoot { buildInfo() }
