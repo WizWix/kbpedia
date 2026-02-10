@@ -30,3 +30,6 @@ spring:
   sql:
     init:
       encoding: utf-8
+jwt:
+  secret: "${JWT_SECRET:your_default_very_long_random_string_here_for_dev_only}"
+  expiration: 3600000 # 1 hour

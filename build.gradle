@@ -24,10 +24,16 @@ dependencies {
   compileOnly 'org.projectlombok:lombok'
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.springframework.boot:spring-boot-starter-security'
   implementation 'org.springframework.boot:spring-boot-starter-web'
   runtimeOnly 'com.mysql:mysql-connector-j'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'org.springframework.security:spring-security-test'
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  // JWT (isn't part of Spring Boot ecosystem)
+  implementation 'io.jsonwebtoken:jjwt-api:0.13.0'
+  runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.13.0'
+  runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.13.0'
 }
 
 configurations.compileOnly.extendsFrom(configurations.annotationProcessor)
@@ -54,7 +60,7 @@ bootJar {
 tasks.register('copyFrontendToResources', Copy) {
   dependsOn(assembleFrontend)
   from(frontendBuildDir)
-  into("${buildDir}/resources/main/static")
+  into("src/main/resources/static")
 }
 
 springBoot { buildInfo() }
