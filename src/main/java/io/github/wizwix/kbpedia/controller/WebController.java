@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class WebController {
-  @GetMapping(value = "{path:(?!api|static|assets|favicon.ico|error)[^.]*}")
+  @SuppressWarnings("MVCPathVariableInspection")
+  @GetMapping(value = {"/", "/{path:[^.]*}", "/**/{path:[^.]*}"})
   public String redirect() {
     return "forward:/index.html";
   }

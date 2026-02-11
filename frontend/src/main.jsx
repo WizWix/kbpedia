@@ -15,34 +15,38 @@ import {ArticleViewPage} from './page/ArticleViewPage.jsx';
 import {EditorPage} from './page/EditorPage.jsx';
 import {CategoryListPage} from './page/CategoryListPage.jsx';
 import {AdminDashboardPage} from './page/AdminDashboardPage.jsx';
+import {AuthProvider} from './context/AuthContext.jsx';
+import {ProtectedRoute} from './components/shared/ProtectedRoute.jsx';
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-      <BrowserRouter>
-        <Header/>
-        <main>
-          <Routes>
-            {/* Public */}
-            <Route path="/" element={<HomePage/>}/>
-            <Route path="/search" element={<SearchPage/>}/>
-            <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/register" element={<RegisterPage/>}/>
-            <Route path="/user/:userId" element={<UserProfilePage/>}/>
+      <AuthProvider>
+        <BrowserRouter>
+          <Header/>
+          <main>
+            <Routes>
+              {/* Public */}
+              <Route path="/" element={<HomePage/>}/>
+              <Route path="/search" element={<SearchPage/>}/>
+              <Route path="/login" element={<LoginPage/>}/>
+              <Route path="/register" element={<RegisterPage/>}/>
+              <Route path="/user/:userId" element={<UserProfilePage/>}/>
 
-            {/* Dynamic Category Routes */}
-            <Route path="/:category" element={<CategoryListPage/>}/>
-            <Route path="/:category/:id" element={<ArticleViewPage/>}/>
-            <Route path="/:category/:id/discussion" element={<DiscussionViewPage/>}/>
+              {/* Dynamic Category Routes */}
+              <Route path="/:category" element={<CategoryListPage/>}/>
+              <Route path="/:category/:id" element={<ArticleViewPage/>}/>
+              <Route path="/:category/:id/discussion" element={<DiscussionViewPage/>}/>
 
-            {/* Protected (User) */}
-            <Route path="/my/*" element={<MyPageLayoutPage/>}/>
-            <Route path="/new" element={<EditorPage/>}/>
-            <Route path="/:category/:id/edit" element={<EditorPage/>}/>
+              {/* Protected (User) */}
+              <Route path="/my/*" element={<ProtectedRoute><MyPageLayoutPage/></ProtectedRoute>}/>
+              <Route path="/new" element={<ProtectedRoute><EditorPage/></ProtectedRoute>}/>
+              <Route path="/:category/:id/edit" element={<ProtectedRoute><EditorPage/></ProtectedRoute>}/>
 
-            {/* Protected (Admin) */}
-            <Route path="/manage" element={<AdminDashboardPage/>}/>
-          </Routes>
-        </main>
-      </BrowserRouter>
+              {/* Protected (Admin) */}
+              <Route path="/manage" element={<ProtectedRoute><AdminDashboardPage/></ProtectedRoute>}/>
+            </Routes>
+          </main>
+        </BrowserRouter>
+      </AuthProvider>
     </StrictMode>,
 );

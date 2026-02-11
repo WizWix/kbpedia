@@ -1,31 +1,28 @@
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useAuth} from '../context/AuthContext.jsx';
 
 export function LoginPage() {
+  const {setUser} = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError('');
+    const resp = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username, password}),
+    });
 
-    try {
-      const resp = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({username, password}),
-      });
-      if (resp.ok) {
-        const data = await resp.json();
-        localStorage.setItem('token', data.token);
-        // this triggers full reload, which resets 'isLoggedIn' state of Header.
-        location.href = '/';
-      } else {
-        const errData = await resp.json();
-        setError(errData.message || '로그인에 실패했습니다.');
-      }
-    } catch (error) {
-      setError('서버와의 통신에 실패했습니다.');
+    if (resp.ok) {
+      const userData = await resp.json();
+      setUser(userData);
+      navigate('/');
+    } else {
+      setError('로그인 실패: 아이디나 비밀번호를 확인하세요');
     }
   };
 

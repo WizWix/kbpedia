@@ -29,23 +29,16 @@ public class SecurityConfig {
         .cors(Customizer.withDefaults())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth
-            // static resource
-            .requestMatchers("/", "/index.html", "/static/**", "/assets/**", "/favicon.ico").permitAll()
+            // static resources + frontend paths
+            .requestMatchers("/", "/index.html", "/static/**", "/assets/**", "/*.js", "/*.css", "/*.ico").permitAll()
             .requestMatchers("/error").permitAll()
-            // public frontend route
-            .requestMatchers("/login", "/register", "/search/**", "/user/**").permitAll()
-            .requestMatchers("/{category}/**").permitAll()
-            // public api endpoint
+            // non-api paths
+            .requestMatchers(req -> !req.getServletPath().startsWith("/api")).permitAll()
+            // api paths
             .requestMatchers("/api/auth/**").permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/articles/**").permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
-            // authenticated api & frontend route
-            .requestMatchers("/my/**", "/new", "/**/edit").hasAnyRole("USER", "ADMIN")
-            .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
-            // admin only
-            .requestMatchers("/manage/**", "/api/admin/**").hasRole("ADMIN")
-            // other requests should be authenticated
-            .anyRequest().authenticated()
+            .requestMatchers(HttpMethod.GET, "/api/articles/**", "/api/categories/**").permitAll()
+            .requestMatchers("/api/admin/**").hasRole("ADMIN")
+            .requestMatchers("/api/**").authenticated()
         )
         .addFilterBefore(new JwtAuthenticationFilter(jwtUtils), UsernamePasswordAuthenticationFilter.class);
     return http.build();
