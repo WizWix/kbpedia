@@ -43,4 +43,21 @@ public class DevDataInitializer {
       }
     };
   }
+
+  @Bean
+  @Profile("!dev")
+  public CommandLineRunner removeDevData() {
+    return args -> {
+      List<String> devUserNames = List.of("admin1", "user1");
+      for (var devUserName : devUserNames) {
+        userRepository.findByUsername(devUserName).ifPresent(user -> {
+          boolean isDevEmail = "admin@email.com".equals(user.getEmail()) || "user@email.com".equals(user.getEmail());
+          boolean isDevPassword = passwordEncoder.matches("1234", user.getPassword());
+          if (isDevEmail && isDevPassword) {
+            userRepository.delete(user);
+          }
+        });
+      }
+    };
+  }
 }

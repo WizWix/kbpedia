@@ -1,4 +1,4 @@
-package io.github.wizwix.kbpedia.request;
+package io.github.wizwix.kbpedia.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

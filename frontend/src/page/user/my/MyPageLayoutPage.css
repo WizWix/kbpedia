@@ -1,0 +1,40 @@
+.mypage-layout {
+  display: flex;
+  min-height: calc(100vh - 60px);
+}
+
+.mypage-sidebar {
+  width: 200px;
+  border-right: 1px solid #ddd;
+  padding: 16px 0;
+  flex-shrink: 0;
+}
+
+.mypage-tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.mypage-tab {
+  padding: 12px 24px;
+  text-decoration: none;
+  color: #555;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.mypage-tab:hover {
+  background: #f5f5f5;
+}
+
+.mypage-tab.active {
+  color: #1a73e8;
+  border-left-color: #1a73e8;
+  background: #e8f0fe;
+  font-weight: 600;
+}
+
+.mypage-content {
+  flex: 1;
+  padding: 24px;
+}
