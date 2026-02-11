@@ -3,12 +3,11 @@ package io.github.wizwix.kbpedia.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
-public class AuthResponse {
-  private String token;
+public class ResponseAuth {
   private String username;
-  private List<String> roles;
+  private Set<String> roles;
 }

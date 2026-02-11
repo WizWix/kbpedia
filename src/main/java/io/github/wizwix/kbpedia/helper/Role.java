@@ -1,4 +1,4 @@
-package io.github.wizwix.kbpedia.enums;
+package io.github.wizwix.kbpedia.helper;
 
 public enum Role {
   ROLE_USER,

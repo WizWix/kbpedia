@@ -2,6 +2,7 @@ package io.github.wizwix.kbpedia.service;
 
 import io.github.wizwix.kbpedia.dto.User;
 import io.github.wizwix.kbpedia.repo.IUserRepository;
+import io.github.wizwix.kbpedia.service.iface.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

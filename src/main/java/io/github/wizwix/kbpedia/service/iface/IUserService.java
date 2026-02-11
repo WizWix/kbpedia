@@ -1,4 +1,4 @@
-package io.github.wizwix.kbpedia.service;
+package io.github.wizwix.kbpedia.service.iface;
 
 import io.github.wizwix.kbpedia.dto.User;
 
