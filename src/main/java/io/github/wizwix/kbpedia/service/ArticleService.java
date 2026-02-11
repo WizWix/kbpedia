@@ -1,10 +1,10 @@
 package io.github.wizwix.kbpedia.service;
 
 import io.github.wizwix.kbpedia.dto.Article;
-import io.github.wizwix.kbpedia.dto.ResponseArticleDetail;
-import io.github.wizwix.kbpedia.dto.ResponseArticleList;
 import io.github.wizwix.kbpedia.dto.Tag;
 import io.github.wizwix.kbpedia.dto.User;
+import io.github.wizwix.kbpedia.dto.message.ResponseArticleDetail;
+import io.github.wizwix.kbpedia.dto.message.ResponseArticleList;
 import io.github.wizwix.kbpedia.helper.SearchCriteria;
 import io.github.wizwix.kbpedia.repo.IArticleRepository;
 import io.github.wizwix.kbpedia.service.iface.IArticleService;
@@ -82,16 +82,6 @@ public class ArticleService implements IArticleService {
     return repo.findAll(spec, pageable).map(this::toListDto);
   }
 
-  private ResponseArticleList toListDto(Article article) {
-    return new ResponseArticleList(
-        article.getId(),
-        article.getTitle(),
-        article.getAuthor().getUsername(),
-        article.getCreatedAt(),
-        article.getUpdatedAt()
-    );
-  }
-
   private Specification<Article> buildSpecification(SearchCriteria criteria) {
     return (root, query, cb) -> {
       Objects.requireNonNull(query).distinct(true);
@@ -134,5 +124,15 @@ public class ArticleService implements IArticleService {
     }
 
     return new SearchCriteria(include, exclude);
+  }
+
+  private ResponseArticleList toListDto(Article article) {
+    return new ResponseArticleList(
+        article.getId(),
+        article.getTitle(),
+        article.getAuthor().getUsername(),
+        article.getCreatedAt(),
+        article.getUpdatedAt()
+    );
   }
 }

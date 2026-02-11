@@ -1,4 +1,4 @@
-package io.github.wizwix.kbpedia.dto;
+package io.github.wizwix.kbpedia.dto.message;
 
 import lombok.Data;
 

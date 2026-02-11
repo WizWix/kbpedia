@@ -28,6 +28,6 @@ public class JwtUtils {
   }
 
   public Claims getClaims(String token) {
-    return Jwts.parser().verifyWith((SecretKey) key).build().parseSignedClaims(token).getPayload();
+    return Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
   }
 }

@@ -1,7 +1,7 @@
 package io.github.wizwix.kbpedia.controller;
 
-import io.github.wizwix.kbpedia.dto.ResponseArticleDetail;
-import io.github.wizwix.kbpedia.dto.ResponseArticleList;
+import io.github.wizwix.kbpedia.dto.message.ResponseArticleDetail;
+import io.github.wizwix.kbpedia.dto.message.ResponseArticleList;
 import io.github.wizwix.kbpedia.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -39,11 +39,10 @@ public class ControllerRestArticle {
   @GetMapping
   public ResponseEntity<Page<ResponseArticleList>> getArticles(
       @RequestParam(required = false) String keyword,
-      @RequestParam(required = false) String tag,
       @RequestParam(defaultValue = "1") int page
   ) {
     Pageable pageable = PageRequest.of(Math.max(page - 1, 0), 30);
 
-    return ResponseEntity.ok(service.searchArticles(keyword, tag, pageable));
+    return ResponseEntity.ok(service.searchArticles(keyword, pageable));
   }
 }

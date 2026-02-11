@@ -1,6 +1,7 @@
 package io.github.wizwix.kbpedia.config;
 
 import io.github.wizwix.kbpedia.dto.User;
+import io.github.wizwix.kbpedia.helper.Role;
 import io.github.wizwix.kbpedia.repo.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
+import java.util.Set;
 
 @Configuration
 @RequiredArgsConstructor
@@ -28,7 +30,7 @@ public class DevDataInitializer {
         admin.setUsername("admin1");
         admin.setPassword(passwordEncoder.encode("1234"));
         admin.setEmail("admin@email.com");
-        admin.setRoles(List.of("ROLE_ADMIN", "ROLE_USER"));
+        admin.setRoles(Set.of(Role.ROLE_ADMIN, Role.ROLE_USER));
         userRepository.save(admin);
         log.info("Dev Profile: Admin account created (admin1/1234)");
       }
@@ -37,7 +39,7 @@ public class DevDataInitializer {
         user.setUsername("user1");
         user.setPassword(passwordEncoder.encode("1234"));
         user.setEmail("user@email.com");
-        user.setRoles(List.of("ROLE_USER"));
+        user.setRoles(Set.of(Role.ROLE_USER));
         userRepository.save(user);
         log.info("Dev Profile: User account created (user1/1234)");
       }

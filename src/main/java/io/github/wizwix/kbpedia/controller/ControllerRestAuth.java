@@ -1,7 +1,7 @@
 package io.github.wizwix.kbpedia.controller;
 
-import io.github.wizwix.kbpedia.dto.RequestLogin;
 import io.github.wizwix.kbpedia.dto.User;
+import io.github.wizwix.kbpedia.dto.message.RequestLogin;
 import io.github.wizwix.kbpedia.jwt.JwtUtils;
 import io.github.wizwix.kbpedia.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
