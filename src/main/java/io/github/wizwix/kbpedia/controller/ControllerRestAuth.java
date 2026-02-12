@@ -39,20 +39,16 @@ public class ControllerRestAuth {
 
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody RequestLogin req) {
-    try {
-      User user = service.authenticate(req.getUsername(), req.getPassword());
-      String token = jwtUtils.generateToken(user.getUsername(), user.getRoles().stream().map(Enum::name).toList());
-      ResponseCookie cookie = ResponseCookie.from("jwt_token", token)
-          .httpOnly(true)
-          .secure(false) // TODO: set this to `true` in HTTPS production!
-          .path("/")
-          .maxAge(jwtUtils.getExpiration() / 1000)
-          .sameSite("Strict")
-          .build();
-      return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body(Map.of("username", user.getUsername(), "roles", user.getRoles()));
-    } catch (RuntimeException e) {
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "사용자 이름 또는 비밀번호가 잘못되었습니다."));
-    }
+    User user = service.authenticate(req.getUsername(), req.getPassword());
+    String token = jwtUtils.generateToken(user.getUsername(), user.getRoles().stream().map(Enum::name).toList());
+    ResponseCookie cookie = ResponseCookie.from("jwt_token", token)
+        .httpOnly(true)
+        .secure(false) // TODO: set this to `true` in HTTPS production!
+        .path("/")
+        .maxAge(jwtUtils.getExpiration() / 1000)
+        .sameSite("Strict")
+        .build();
+    return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body(Map.of("username", user.getUsername(), "roles", user.getRoles()));
   }
 
   @PostMapping("/logout")
@@ -62,8 +58,6 @@ public class ControllerRestAuth {
         .path("/")
         .maxAge(0)
         .build();
-    return ResponseEntity.ok()
-        .header(HttpHeaders.SET_COOKIE, cookie.toString())
-        .body("Logged out");
+    return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body("Logged out");
   }
 }

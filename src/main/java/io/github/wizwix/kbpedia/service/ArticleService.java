@@ -48,7 +48,7 @@ public class ArticleService implements IArticleService {
 
   @Override
   public ResponseArticleDetail getArticle(Long id) {
-    Article article = repo.findById(id).orElseThrow(() -> new RuntimeException("Article not found"));
+    Article article = repo.findByIdWithDetails(id).orElseThrow(() -> new RuntimeException("Article not found"));
     return new ResponseArticleDetail(
         article.getId(),
         article.getTitle(),

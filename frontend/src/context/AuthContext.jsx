@@ -1,4 +1,5 @@
 import {createContext, useContext, useEffect, useState} from 'react';
+import {apiFetch} from '../util/api_fetch.js';
 
 const AuthContext = createContext(null);
 
@@ -8,7 +9,7 @@ export function AuthProvider({children}) {
 
   const checkAuth = async () => {
     try {
-      const resp = await fetch('/api/auth/me');
+      const resp = await apiFetch('/api/auth/me');
       if (resp.ok) {
         const data = await resp.json();
         setUser(data);
@@ -25,6 +26,14 @@ export function AuthProvider({children}) {
   useEffect(() => {
     // noinspection JSIgnoredPromiseFromCall
     checkAuth();
+
+    const handleAuthFailure = () => {
+      setUser(null);
+    };
+
+    window.addEventListener('auth-failure', handleAuthFailure);
+
+    return () => window.removeEventListener('auth-failure', handleAuthFailure);
   }, []);
 
   return (
