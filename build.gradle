@@ -35,6 +35,8 @@ dependencies {
   implementation 'io.jsonwebtoken:jjwt-api:0.13.0'
   runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.13.0'
   runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.13.0'
+  // JSoup (sanitize user input, which is mix of CommonMark and HTML tags)
+  implementation 'org.jsoup:jsoup:1.22.1'
 }
 
 configurations.compileOnly.extendsFrom(configurations.annotationProcessor)
