@@ -1,6 +1,5 @@
-package io.github.wizwix.knowledgegarden.dto;
+package io.github.wizwix.knowledgegarden.model;
 
-import io.github.wizwix.knowledgegarden.helper.Role;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;

@@ -1,6 +1,6 @@
 package io.github.wizwix.knowledgegarden.repo;
 
-import io.github.wizwix.knowledgegarden.dto.User;
+import io.github.wizwix.knowledgegarden.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

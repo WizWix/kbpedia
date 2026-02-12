@@ -1,4 +1,4 @@
-package io.github.wizwix.knowledgegarden.helper;
+package io.github.wizwix.knowledgegarden.model;
 
 public enum Role {
   ROLE_USER,

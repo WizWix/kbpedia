@@ -1,6 +1,6 @@
 package io.github.wizwix.knowledgegarden.service.iface;
 
-import io.github.wizwix.knowledgegarden.dto.User;
+import io.github.wizwix.knowledgegarden.model.User;
 
 import java.util.Optional;
 

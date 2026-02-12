@@ -1,7 +1,7 @@
 package io.github.wizwix.knowledgegarden.controller;
 
-import io.github.wizwix.knowledgegarden.dto.message.ResponseArticleDetail;
-import io.github.wizwix.knowledgegarden.dto.message.ResponseArticleList;
+import io.github.wizwix.knowledgegarden.dto.response.ResponseArticleDetail;
+import io.github.wizwix.knowledgegarden.dto.response.ResponseArticleList;
 import io.github.wizwix.knowledgegarden.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/articles")
 @RequiredArgsConstructor
-public class ControllerRestArticle {
+public class ArticleApiController {
   private final ArticleService service;
 
   @GetMapping("/{id}")
@@ -40,4 +40,7 @@ public class ControllerRestArticle {
 
     return ResponseEntity.ok(service.getArticles(username, pageable));
   }
+
+//  @PostMapping
+//  public ResponseEntity<?> createArticle() {}
 }

@@ -1,4 +1,4 @@
-package io.github.wizwix.knowledgegarden.helper;
+package io.github.wizwix.knowledgegarden.util;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

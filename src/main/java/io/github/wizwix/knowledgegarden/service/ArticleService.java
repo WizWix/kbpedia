@@ -1,11 +1,11 @@
 package io.github.wizwix.knowledgegarden.service;
 
-import io.github.wizwix.knowledgegarden.dto.Article;
-import io.github.wizwix.knowledgegarden.dto.Tag;
-import io.github.wizwix.knowledgegarden.dto.User;
-import io.github.wizwix.knowledgegarden.dto.message.ResponseArticleDetail;
-import io.github.wizwix.knowledgegarden.dto.message.ResponseArticleList;
-import io.github.wizwix.knowledgegarden.helper.SearchCriteria;
+import io.github.wizwix.knowledgegarden.model.Article;
+import io.github.wizwix.knowledgegarden.model.Tag;
+import io.github.wizwix.knowledgegarden.model.User;
+import io.github.wizwix.knowledgegarden.dto.response.ResponseArticleDetail;
+import io.github.wizwix.knowledgegarden.dto.response.ResponseArticleList;
+import io.github.wizwix.knowledgegarden.dto.SearchCriteria;
 import io.github.wizwix.knowledgegarden.repo.IArticleRepository;
 import io.github.wizwix.knowledgegarden.service.iface.IArticleService;
 import io.github.wizwix.knowledgegarden.service.iface.ITagService;
@@ -35,7 +35,7 @@ public class ArticleService implements IArticleService {
 
   @Override
   @Transactional
-  public Article createArticle(String title, String content, Set<String> tagNames, User author) {
+  public ResponseArticleDetail createArticle(String title, String content, Set<String> tagNames, User author) {
     Article article = new Article();
     article.setTitle(title);
     article.setContent(content);

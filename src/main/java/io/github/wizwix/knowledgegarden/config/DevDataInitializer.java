@@ -1,7 +1,7 @@
 package io.github.wizwix.knowledgegarden.config;
 
-import io.github.wizwix.knowledgegarden.dto.User;
-import io.github.wizwix.knowledgegarden.helper.Role;
+import io.github.wizwix.knowledgegarden.model.User;
+import io.github.wizwix.knowledgegarden.model.Role;
 import io.github.wizwix.knowledgegarden.repo.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package io.github.wizwix.knowledgegarden.service;
 
-import io.github.wizwix.knowledgegarden.dto.Tag;
+import io.github.wizwix.knowledgegarden.model.Tag;
 import io.github.wizwix.knowledgegarden.repo.ITagRepository;
 import io.github.wizwix.knowledgegarden.service.iface.ITagService;
 import lombok.RequiredArgsConstructor;

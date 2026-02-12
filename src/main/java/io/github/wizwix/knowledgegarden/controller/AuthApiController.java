@@ -1,7 +1,7 @@
 package io.github.wizwix.knowledgegarden.controller;
 
-import io.github.wizwix.knowledgegarden.dto.User;
-import io.github.wizwix.knowledgegarden.dto.message.RequestLogin;
+import io.github.wizwix.knowledgegarden.model.User;
+import io.github.wizwix.knowledgegarden.dto.request.RequestLogin;
 import io.github.wizwix.knowledgegarden.jwt.JwtUtils;
 import io.github.wizwix.knowledgegarden.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,7 +22,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-public class ControllerRestAuth {
+public class AuthApiController {
   private final JwtUtils jwtUtils;
   private final UserService service;
 
@@ -39,7 +39,7 @@ public class ControllerRestAuth {
 
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody RequestLogin req) {
-    User user = service.authenticate(req.getUsername(), req.getPassword());
+    User user = service.authenticate(req.username(), req.password());
     String token = jwtUtils.generateToken(user.getUsername(), user.getRoles().stream().map(Enum::name).toList());
     ResponseCookie cookie = ResponseCookie.from("jwt_token", token)
         .httpOnly(true)
